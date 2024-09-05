@@ -19,13 +19,39 @@
   overflow: hidden;
   margin-top: -60px; /* Overlap with navbar */
   min-height: 100vh; /* Ensure header covers the entire viewport height */
-
+  
   /* Gradient layer */
   background: linear-gradient(145deg, rgba(18, 19, 26, 0.8), rgba(18, 19, 26, 0.8));
   color: #ffffff;
 }
 
-/* Pseudo-element for background image with opacity */
+/* Floating text animation */
+.heroBanner-content {
+  position: relative;
+  z-index: 2; /* Ensure content is above the background */
+  font-size: 2rem;
+  animation: floatText 5s ease-in-out infinite;
+}
+
+/* Keyframes for floating effect */
+@keyframes floatText {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px); /* Move the text up */
+  }
+  100% {
+    transform: translateY(0px); /* Return the text to the starting position */
+  }
+}
+
+/* Pseudo-element for background video */
+.heroBanner {
+  position: relative;
+  z-index: 1; /* Ensure it is above the background elements */
+}
+
 .heroBanner::before {
   content: "";
   position: absolute;
@@ -39,6 +65,18 @@
   animation: fadeOutOpacity 10s ease-out infinite; /* Apply animation */
 }
 
+/* Background video styling */
+.heroBanner video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 60px);
+  object-fit: cover;
+  z-index: -1; /* Ensure it is behind the gradient and text */
+  opacity: 0.5; /* Optional opacity for the video */
+}
+
 /* Pseudo-element for gradient effect */
 .heroBanner::after {
   content: "";
@@ -49,9 +87,16 @@
   height: calc(100vh - 60px);
   background: linear-gradient(145deg, rgba(18, 19, 26, 0.8), rgba(18, 19, 26, 0.2)); /* Gradient background */
   opacity: 0.8; /* Initial gradient opacity */
-  z-index: 1; /* Ensure it is above the image but below the text */
+  z-index: 1; /* Ensure it is above the video but below the text */
   animation: fadeOutGradient 10s ease-out infinite; /* Apply animation */
 }
+
+/* Additional styling to ensure hero text/content is above the background elements */
+.heroBanner-content {
+  position: relative;
+  z-index: 2; /* Ensure content is above both video and gradient */
+}
+
 
 /* Keyframes for image opacity animation */
 @keyframes fadeOutOpacity {
